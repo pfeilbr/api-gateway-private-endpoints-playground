@@ -2,7 +2,7 @@
 
 learn API Gateway private endpoints
 
-## Steps
+## Setup Steps
 
 configure API Gateway private endpoint that leverages HTTP proxy integration.  Test via lambda with VPC config that issues HTTP GET request to vpc endpoint.
 
@@ -14,9 +14,9 @@ configure API Gateway private endpoint that leverages HTTP proxy integration.  T
 * check VPC endpoint policy
 * check lambda VPC config and security groups
 
-**API Gateway resource policy**
+---
 
-*note the `Deny` + `Allow` combination*
+**API Gateway resource policy**
 
 ```json
 {
@@ -43,17 +43,17 @@ configure API Gateway private endpoint that leverages HTTP proxy integration.  T
 }
 ```
 
+> note the `Deny` + `Allow` combination*
+
+---
+
 **Lambda test code**
 
-* note the `Host` header that allows for the request to be routed
-
 ```javascript
-var https = require('https');
+const https = require('https');
 
 exports.handler =  (event, context, callback) => {
-
-
-  // https://scheqe4ymi.execute-api.us-east-1.amazonaws.com/prod
+   // https://scheqe4ymi.execute-api.us-east-1.amazonaws.com/prod
     var options = {
       host: 'vpce-02b487f2d021986fb-yl0hav78.execute-api.us-east-1.vpce.amazonaws.com',
       path: '/prod/index.html',
@@ -64,15 +64,11 @@ exports.handler =  (event, context, callback) => {
       }
     };
 
-    var cb = function(response) {
-      var str = '';
-
-      //another chunk of data has been received, so append it to `str`
+    const cb = function(response) {
+      let str = '';
       response.on('data', function (chunk) {
         str += chunk;
       });
-
-      //the whole response has been received, so we just print it out here
       response.on('end', function () {
         console.log(str);
         const response = {
@@ -85,13 +81,10 @@ exports.handler =  (event, context, callback) => {
     }
 
     https.request(options, cb).end();
-
-    // TODO implement
-
-};
-
+}
 ```
 
+> note the `Host` header that allows for the request to be routed
 ## Screenshots
 
 ![vpc endpoint](https://www.evernote.com/l/AAGrjZAlRdJMoqMj1JPsqAIKfnwGUVhoEeEB/image.png)
