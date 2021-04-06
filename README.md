@@ -87,7 +87,9 @@ exports.handler =  (event, context, callback) => {
 > note the `Host` header that allows for the request to be routed
 ## Screenshots
 
-![vpc endpoint](https://www.evernote.com/l/AAGrjZAlRdJMoqMj1JPsqAIKfnwGUVhoEeEB/image.png)
+![vpc endpoint](https://www.evernote.com/l/AAH6tr5RhgxNK61jSXvjZo7cmQMffnGKCi8B/image.png)
+
+![vpc endpoint policy](https://www.evernote.com/l/AAEXuCeCfH1Fkq5M_JSsdQoZiKA3GW4R22wB/image.png)
 
 ![allowed vpc endpoint ids to api gateway](https://www.evernote.com/l/AAGVD-ntdc5BubphIWrF-86BSTmUc3JhDeAB/image.png)
 
